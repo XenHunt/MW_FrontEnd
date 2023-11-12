@@ -1,0 +1,8 @@
+@for (user of users; track user.username){
+<div>
+  <h1>{{user.username}}</h1>
+  <p>{{user.password}}</p>
+</div>
+} @empty{
+<p>No users</p>
+}

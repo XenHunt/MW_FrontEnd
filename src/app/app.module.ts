@@ -5,18 +5,21 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { fakeBackendProvider } from './shared/fake_backend';
+// import { fakeBackendProvider } from './shared/fake_backend';
 import { LoginComponent } from './components/login/login.component';
 import { SecondComponent } from './components/second/second.component';
-import {DemoMaterialModule} from './modules/demo-material.module';
+import { DemoMaterialModule } from './modules/demo-material.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { authGuardGuard } from './services/auth.guard.guard';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+// import { authGuardGuard } from './services/auth.guard.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './components/admin/admin.component';
 import { NotAccessComponent } from './components/not-access/not-access.component';
 import { MenuBarComponent } from './shared/menu-bar/menu-bar.component';
 import { HomeComponent } from './components/home/home.component';
+import { JwtInterceptor } from './shared/jwt-interceptor';
+import { FakeBackendInteceptor } from './shared/fake_backend';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { HomeComponent } from './components/home/home.component';
     NotAccessComponent,
     MenuBarComponent,
     HomeComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [fakeBackendProvider],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, FakeBackendInteceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

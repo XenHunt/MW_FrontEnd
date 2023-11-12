@@ -1,11 +1,11 @@
-import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy, Signal, signal} from '@angular/core';
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {NgIf, NgFor} from '@angular/common';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnDestroy, signal } from '@angular/core';
+// import { MatListModule } from '@angular/material/list';
+// import { MatSidenavModule } from '@angular/material/sidenav';
+// import { MatIconModule } from '@angular/material/icon';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgIf, NgFor } from '@angular/common';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -17,11 +17,11 @@ export class MenuBarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   authed = signal(true)
   routes = [
-    {name: "Home", link: "/"},
-    {name: 'Login', link: '/login'},
-    {name: 'Admin', link: '/admin'},
-    {name: 'Second', link: '/second'},
-    {name: 'Not', link: '/not'}
+    { name: "Home", link: "/" },
+    { name: 'Login', link: '/login' },
+    { name: 'Admin', link: '/admin' },
+    { name: 'Second', link: '/second' },
+    { name: 'Not', link: '/not' }
   ];
 
   private _mobileQueryListener: () => void;
@@ -40,14 +40,13 @@ export class MenuBarComponent implements OnDestroy {
   ngOnInit(): void {
     if (!this.authService.userValue) {
       this.authed.set(false)
-    } else
-    {
+    } else {
       this.authed.set(true)
     }
   }
 
   shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(window.location.host);
-  logout(){
+  logout() {
     this.authService.logout()
     this.authed.set(false)
   }

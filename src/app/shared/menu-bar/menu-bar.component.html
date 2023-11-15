@@ -3,8 +3,8 @@
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Responsive App</h1>
     <span class="spacer"></span>
-    <div *ngIf="authed()" class="button-row">
-      <mat-form-field mat-button (click)="logout()">Exit</mat-form-field>
+    <div *ngIf="authed" class="button-row">
+      <button mat-button (click)="logout()">Exit</button>
     </div>
 
   </mat-toolbar>

@@ -41,7 +41,7 @@ import { UsersComponent } from './components/users/users.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, FakeBackendInteceptor],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

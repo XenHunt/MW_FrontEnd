@@ -12,8 +12,11 @@ export interface BaseUser {
 }
 
 export interface User extends BaseUser {
-  refresh_token?:string;
-  access_token?:string;
+  refresh_token: {
+    token: string;
+    update_date: Date;
+  }
+  access_token: string;
 }
 
 export interface UserWithPassword extends BaseUser {

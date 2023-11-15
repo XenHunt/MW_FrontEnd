@@ -1,11 +1,12 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, Signal, computed } from '@angular/core';
+import { Observable } from 'rxjs';
 // import { MatListModule } from '@angular/material/list';
 // import { MatSidenavModule } from '@angular/material/sidenav';
 // import { MatIconModule } from '@angular/material/icon';
 // import { MatButtonModule } from '@angular/material/button';
 // import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgIf, NgFor } from '@angular/common';
+// import { NgIf, NgFor } from '@angular/common';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class MenuBarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
-  authed = signal(true)
+  authed = false;
   routes = [
     { name: "Home", link: "/" },
     { name: 'Login', link: '/login' },
@@ -32,22 +33,19 @@ export class MenuBarComponent implements OnDestroy {
     // this.mobileQuery.addListener(this._mobileQueryListener);
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
+  ngOnInit(): void {
+    this.authService.user.subscribe(user => {
+      this.authed = !!user
+    })
+  }
 
   ngOnDestroy(): void {
     // this.mobileQuery.removeListener(this._mobileQueryListener);
     this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
   }
-  ngOnInit(): void {
-    if (!this.authService.userValue) {
-      this.authed.set(false)
-    } else {
-      this.authed.set(true)
-    }
-  }
 
   shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(window.location.host);
   logout() {
     this.authService.logout()
-    this.authed.set(false)
   }
 }

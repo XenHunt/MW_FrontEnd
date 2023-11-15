@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-second',
@@ -7,7 +7,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
   styleUrls: ['./second.component.css']
 })
 export class SecondComponent {
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   toAdmin() {
     this.router.navigate(['/admin'])

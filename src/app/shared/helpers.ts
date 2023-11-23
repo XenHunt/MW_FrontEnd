@@ -3,12 +3,21 @@ export enum Role {
   Admin = 'Admin'
 }
 
-export interface BaseUser {
-  id: number;
-  firstName: string;
-  lastName: string;
+export interface UniqueId {
+  uid: string,
+  system_string: string,
+}
+
+export interface UserRegistration {
   username: string;
-  role: Role;
+  password: string;
+  role: Role
+  firstName?: string;
+  lastName?: string;
+}
+
+export interface BaseUser extends UserRegistration {
+  id: number;
 }
 
 export interface User extends BaseUser {
@@ -22,3 +31,5 @@ export interface User extends BaseUser {
 export interface UserWithPassword extends BaseUser {
   password: string;
 }
+
+export const checkAccessUrl = "http://127.0.0.1:8000/protected-access/"

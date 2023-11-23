@@ -1,8 +1,13 @@
-<!-- @for (user of users; track user.username){ -->
-<!-- <div> -->
-<!--   <h1>user.username</h1> -->
-<!--   <p>user.password</p> -->
-<!-- </div> -->
-<!-- } @empty{ -->
-<!-- <p>No users</p> -->
-<!-- } -->
+<div>
+  <ng-container *ngIf="users">
+    <h1> Users </h1>
+    <div *ngFor="let user of users">
+      <div class="card">
+        <a>{{user.username}}</a>
+      </div>
+      <!-- <div>{{user.password}}</div> -->
+    </div>
+    <div>{{users}}</div>
+  </ng-container>
+  <div *ngIf="!users">No users</div>
+</div>

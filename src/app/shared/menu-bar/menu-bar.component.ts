@@ -22,7 +22,8 @@ export class MenuBarComponent implements OnDestroy {
     { name: 'Login', link: '/login' },
     { name: 'Admin', link: '/admin' },
     { name: 'Second', link: '/second' },
-    { name: 'Not', link: '/not' }
+    { name: 'Not', link: '/not' },
+    { name: 'Users', link: '/users' }
   ];
 
   private _mobileQueryListener: () => void;

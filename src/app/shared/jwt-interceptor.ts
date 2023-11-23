@@ -21,6 +21,7 @@ export class JwtInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${user.refresh_token.token}`
         }
       });
+      console.log(`refresh Bearer ${user.refresh_token.token}`)
     }
     if (isLoggedIn && isApiUrl && !isRefreshUrl) {
       request = request.clone({
@@ -28,6 +29,7 @@ export class JwtInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${user.access_token}`
         }
       });
+      console.log(`access Bearer ${user.access_token}`)
     }
 
     return next.handle(request);

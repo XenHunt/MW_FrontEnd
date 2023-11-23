@@ -20,6 +20,8 @@ import { HomeComponent } from './components/home/home.component';
 import { JwtInterceptor } from './shared/jwt-interceptor';
 import { FakeBackendInteceptor } from './shared/fake_backend';
 import { UsersComponent } from './components/users/users.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { TokenExpirationInterceptor } from './shared/token-expiration.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { UsersComponent } from './components/users/users.component';
     MenuBarComponent,
     HomeComponent,
     UsersComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { UsersComponent } from './components/users/users.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

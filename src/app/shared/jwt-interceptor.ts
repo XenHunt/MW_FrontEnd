@@ -21,7 +21,7 @@ export class JwtInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${user.refresh_token.token}`
         }
       });
-      console.log(`refresh Bearer ${user.refresh_token.token}`)
+      // console.log(`refresh Bearer ${user.refresh_token.token}`)
     }
     if (isLoggedIn && isApiUrl && !isRefreshUrl) {
       request = request.clone({
@@ -29,7 +29,18 @@ export class JwtInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${user.access_token}`
         }
       });
-      console.log(`access Bearer ${user.access_token}`)
+      // console.log(`access Bearer ${user.access_token}`)
+    }
+
+    const uid = this.authenticationService.userIdValue
+    if (uid && request.method != 'GET') {
+      request = request.clone({
+        body: {
+          ...request.body,
+          uid: uid.uid,
+          system_string: uid.system_string
+        }
+      });
     }
 
     return next.handle(request);

@@ -27,7 +27,8 @@ export class LoginComponent {
   }
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.f)
+      // console.log(this.f)
+      // this.f
       this.authService.login(this.f['username'].value, this.f['password'].value)
         .pipe(first())
         .subscribe({
@@ -38,8 +39,8 @@ export class LoginComponent {
           },
           error: error => {
             console.log('You shall not pass');
-            console.log(error)
-            this.flag = true
+            console.log(error);
+            this.flag = true;
           }
         }
         )

@@ -1,7 +1,7 @@
 {
-    "/api/*": {
+    "/api": {
         "target": "http://localhost:5000",
-        "pathRewrite": {"^/client-api": ""},
+        "pathRewrite": {"api": ""},
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug" 

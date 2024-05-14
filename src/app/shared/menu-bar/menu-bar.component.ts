@@ -1,6 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, Signal, computed } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 // import { MatListModule } from '@angular/material/list';
 // import { MatSidenavModule } from '@angular/material/sidenav';
 // import { MatIconModule } from '@angular/material/icon';
@@ -16,6 +16,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class MenuBarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+  private subscription?: Subscription;
   authed = false;
   routes = [
     { name: "Home", link: "/" },
@@ -35,7 +36,7 @@ export class MenuBarComponent implements OnDestroy {
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
   ngOnInit(): void {
-    this.authService.user.subscribe(user => {
+    this.subscription = this.authService.user.subscribe(user => {
       this.authed = !!user
     })
   }
@@ -43,6 +44,7 @@ export class MenuBarComponent implements OnDestroy {
   ngOnDestroy(): void {
     // this.mobileQuery.removeListener(this._mobileQueryListener);
     this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
+    this.subscription?.unsubscribe()
   }
 
   shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(window.location.host);

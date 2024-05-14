@@ -22,6 +22,9 @@ import { FakeBackendInteceptor } from './shared/fake_backend';
 import { UsersComponent } from './components/users/users.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { TokenExpirationInterceptor } from './shared/token-expiration.interceptor';
+import { UserButtonComponent } from './components/user.button/user.button.component';
+import { UserComponent } from './components/user/user.component';
+import { GraphComponent } from './components/graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { TokenExpirationInterceptor } from './shared/token-expiration.intercepto
     HomeComponent,
     UsersComponent,
     RegistrationComponent,
+    UserButtonComponent,
+    UserComponent,
+    GraphComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +50,7 @@ import { TokenExpirationInterceptor } from './shared/token-expiration.intercepto
     ReactiveFormsModule,
     HttpClientModule
   ],
+  exports: [UserButtonComponent],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true }],
   bootstrap: [AppComponent]

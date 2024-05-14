@@ -5,10 +5,8 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable, catchError, throwError, timer } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
-import { environment } from 'src/environment/environment';
-import { waitForAsync } from '@angular/core/testing';
 
 @Injectable()
 export class TokenExpirationInterceptor implements HttpInterceptor {
@@ -18,23 +16,23 @@ export class TokenExpirationInterceptor implements HttpInterceptor {
   constructor(private authService: AuthenticationService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('start intercept')
+    // console.log('start intercept')
     const user = this.authService.userValue;
     const isRefresh = request.headers.get('Authorization') === `Bearer ${user?.refresh_token.token}`
     if (isRefresh) {
-      console.log(`refresh in intercept Bearer ${user?.refresh_token.token}`)
+      // console.log(`refresh in intercept Bearer ${user?.refresh_token.token}`)
     }
     if (isRefresh || this.isRefreshing) {
-      console.log('isRefresh')
+      // console.log('isRefresh')
       return next.handle(request)
     }
     return next.handle(request).pipe(catchError((err) => {
       if (err.status === 401) {
-        console.log('401 first')
+        // console.log('401 first')
         this.authService.refreshTokens(true);
         return this.handle401Error(request, next);
       }
-      console.log('401 outside first')
+      // console.log('401 outside first')
       return next.handle(request);
     }));
   }
@@ -48,11 +46,11 @@ export class TokenExpirationInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError((err) => {
       this.isRefreshing = false;
       if (err.status === 401) {
-        console.log('401 second')
+        // console.log('401 second')
         // this.authService.logout();
         // return next.handle(request);
       }
-      console.log('401 outside second')
+      // console.log('401 outside second')
       return throwError(() => err);
     }));
 

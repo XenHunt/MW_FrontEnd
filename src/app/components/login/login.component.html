@@ -1,37 +1,37 @@
-  <mat-card>
-    <mat-card-content>
-      <div class="header">
-          <h2>Форма авторизации</h2>
+<mat-card>
+  <mat-card-content>
+    <div class="header">
+      <h2>Форма авторизации</h2>
+    </div>
+    <form (ngSubmit)="onSubmit()" name="loginForm" [formGroup]="loginForm">
+      <div class="UserIdInput">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Логин</mat-label>
+          <input formControlName="username" matInput required />
+          <mat-error *ngIf="!loginForm.controls['username'].valid">
+            Необходимо ввести логин
+          </mat-error>
+        </mat-form-field>
       </div>
-      <form (ngSubmit)="onSubmit()" name="loginForm" [formGroup]="loginForm">
-        <div class="UserIdInput">
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Логин</mat-label>
-            <input formControlName="username" matInput  required/>
-            <mat-error *ngIf="!loginForm.controls['username'].valid">
-                Необходимо ввести логин
-            </mat-error>
-          </mat-form-field>
-          </div>
-        <div>
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Пороль</mat-label>
-            <input formControlName="password" matInput required />
-            <mat-error *ngIf="!loginForm.controls['password'].valid">
-              Необходимо ввести пароль
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div *ngIf="flag" class="col alert alert-danger error-message">
-          Ошибка авторизации (ты что дебил!?)
-        </div>
-        <button mat-flat-button color="primary" style="border-radius:10px; width : 10em;" >Login</button>
-        <!-- <button mat-flat-button color="primary" style="border-radius:10px; width : 10em" (click)="Exit()">Exit</button> -->
-      </form>
-      <!-- <div *ngIf="error" class="col alert alert-danger">
+      <div>
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Пороль</mat-label>
+          <input formControlName="password" matInput required />
+          <mat-error *ngIf="!loginForm.controls['password'].valid">
+            Необходимо ввести пароль
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngIf="flag" class="col alert alert-danger error-message">
+        Ошибка авторизации (ты что дебил!?)
+      </div>
+      <button mat-flat-button color="primary" style="border-radius:10px; width : 10em;">Login</button>
+      <!-- <button mat-flat-button color="primary" style="border-radius:10px; width : 10em" (click)="Exit()">Exit</button> -->
+    </form>
+    <!-- <div *ngIf="error" class="col alert alert-danger">
           {{ error }}
       </div> -->
-      <div class="button-row">
-      </div>
-    </mat-card-content>
-  </mat-card>
+    <div class="button-row">
+    </div>
+  </mat-card-content>
+</mat-card>

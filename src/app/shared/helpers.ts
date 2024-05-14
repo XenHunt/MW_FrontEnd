@@ -10,7 +10,7 @@ export interface UniqueId {
 
 export interface UserRegistration {
   username: string;
-  password: string;
+  password?: string;
   role: Role
   firstName?: string;
   lastName?: string;
@@ -33,3 +33,20 @@ export interface UserWithPassword extends BaseUser {
 }
 
 export const checkAccessUrl = "http://127.0.0.1:8000/protected-access/"
+
+export interface MeetingsTable {
+  count: number,
+  address: string
+
+}
+
+
+// export interface UserBase {
+//   username:string,
+//   email: string,
+//   role:Role,
+// }
+//
+// export interface UserReg extends UserBase {
+//   password: string,
+// }

@@ -9,6 +9,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { NotAccessComponent } from './components/not-access/not-access.component';
 import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './components/users/users.component';
+import { UserComponent } from './components/user/user.component';
+import { GraphComponent } from './components/graph/graph.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,20 @@ const routes: Routes = [
     data: {
       roles: [Role.Admin]
     }
+  },
+  {
+    path: "user/:id",
+    component: UserComponent,
+    canActivate: [authGuard],
+    // data: {
+    //   roles: [Role.Admin]
+    // }
+  },
+  {
+    path: "graph", component: GraphComponent, canActivate: [authGuard],
+    data: {
+      roles: [Role.Admin]
+    },
   },
   {
     path: '**',
